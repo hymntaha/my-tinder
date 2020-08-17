@@ -4,18 +4,12 @@ import './TinderCards.css';
 import database from './firebase';
 
 const MyComponent = () => {
-  const [people, setPeople] = useState([
-    {
-      name: 'Steve Jobs',
-      url: 'https://2060krokus12o7dbd503f81w-wpengine.netdna-ssl.com/wp-content/uploads/2018/11/ATA010819jobs_img01.jpg'
-    }, {
-      name:'Mark Zuckerberg',
-      url:'https://image.cnbcfm.com/api/v1/image/105974278-1560857198722gettyimages-1146088646.jpeg?v=1562202866&w=740&h=416'
-    }
-  ]);
+  const [people, setPeople] = useState([]);
 
   useEffect(()=>{
-    database.collection('people')
+    database.collection('people').onSnapshot(snapshot => (
+      setPeople(snapshot.docs.map(doc => doc.data()))
+    ));
   },[])
 
   return (
