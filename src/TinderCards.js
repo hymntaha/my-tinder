@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import TinderCard from 'react-tinder-card';
 import './TinderCards.css';
+import database from './firebase';
 
 const MyComponent = () => {
   const [people, setPeople] = useState([
@@ -14,8 +15,8 @@ const MyComponent = () => {
   ]);
 
   useEffect(()=>{
-
-  },[people])
+    database.collection('people')
+  },[])
 
   return (
     <div>
